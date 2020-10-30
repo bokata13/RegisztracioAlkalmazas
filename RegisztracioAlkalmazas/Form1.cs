@@ -215,6 +215,7 @@ namespace RegisztracioAlkalmazas
                             {
                                 lista.Add(olvas.ReadLine());
                             }
+                            olvas.Close();
                         }
                     }
 
