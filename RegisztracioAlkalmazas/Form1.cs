@@ -193,6 +193,66 @@ namespace RegisztracioAlkalmazas
             }
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<string> lista = new List<string>();
+            Stream szoveg = null;
+            OpenFileDialog betoltes = new OpenFileDialog();
+            betoltes.Title = "File megnyitása";
+            betoltes.Filter = "TXT files|*.txt";
+            betoltes.RestoreDirectory = true;
+            betoltes.AddExtension = true;
+            if (betoltes.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((szoveg = betoltes.OpenFile()) != null)
+                    {
+                        using (szoveg)
+                        {
+                            StreamReader olvas = new StreamReader(szoveg);
+                            while (!olvas.EndOfStream)
+                            {
+                                lista.Add(olvas.ReadLine());
+                            }
+                        }
+                    }
 
+
+                    String beolvasott = lista[0];
+                    char[] spearator = { ';' };
+                    List<string> adatok = new List<string>(beolvasott.Split(spearator));
+
+                    tb_nev.Text = Convert.ToString(adatok[0]);
+                    tb_szuldatum.Text = Convert.ToString(adatok[1]);
+
+                    if (Convert.ToString(adatok[2]) == "nő")
+                    {
+                        rb_n.Checked = true;
+                    }
+                    else 
+                    {
+                        rb_f.Checked = true;
+                    }
+
+                    String str = lista[1];
+                    List<string> strlist = new List<string>(str.Split(spearator));
+
+                    foreach (String s in strlist)
+                    {
+                        listBox1.DataSource = strlist;
+                        if (s == (Convert.ToString(adatok[3])))
+                        {
+                            listBox1.SelectedItem = s;
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                }
+            }
+        }
     }
 }
