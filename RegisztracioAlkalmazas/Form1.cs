@@ -184,6 +184,14 @@ namespace RegisztracioAlkalmazas
                             iras.Close();
                         }
                     }
+                    tb_nev.Clear();
+                    tb_szuldatum.Clear();
+                    rb_f.Checked = false;
+                    rb_n.Checked = false;
+                    listBox1.Items.Clear();
+                    listBox1.Items.Add("Úszás");
+                    listBox1.Items.Add("Horgászat");
+                    listBox1.Items.Add("Futás");
                 }
                 
             }
